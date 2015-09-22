@@ -36,6 +36,7 @@ SendInput jqwhen`n
 SendInput jqapply`n
 SendInput jqon`n
 SendInput jqoff`n
+SendInput jqchange`n
 SendInput jjanon`n
 SendInput jjfun`n
 SendInput jjfilter`n
@@ -62,6 +63,10 @@ SendInput shaliaseswork`n
 SendInput gogo`n
 SendInput esfun`n
 SendInput esforeach`n
+SendInput esclick`n
+SendInput eschange`n
+SendInput esapply`n
+SendInput eswidgetstart`n
 SendInput jjpush`n
 SendInput esmap`n
 SendInput tpgruntfile`n
@@ -309,6 +314,11 @@ return
 
 :*:jqoff::
 SendInput $(".selector").off("click.namespace");`n
+return
+
+:*:jqchange::
+SendInput $("selector").change(function() {{}{}});`n
+Send {Left 3}
 return
 
 :*:jqajaxpost::
@@ -619,6 +629,52 @@ return
 SendInput let temp = array.filter(element => {{}`n
 SendInput return temp === temp`n
 SendInput {}})`n
+return
+
+:*:esclick::
+SendInput $("").click(() => {{}{}})
+Send {Left 2}
+return
+
+:*:eschange::
+SendInput $("selector").change(() => {{}{}})
+Send {Left 2}
+return
+
+:*:esapply::
+SendInput $.when.apply($, deferreds).done(() => {{}{}})
+Send {Left 2}
+return
+
+:*:eswidgetstart::
+SendInput $(() => {{}`n
+SendInput {space 2}abc.initialize()`n
+SendInput {space 2}// ebot.updateDocumentation(abc)`n
+SendInput {}})`n
+SendInput `n
+SendInput `n
+SendInput let abc = {{}`n
+SendInput {space 2}`n
+SendInput {space 2}initialize: () => {{}`n
+SendInput {space 4}abc.assignInitialHandlers()`n
+SendInput {space 4}abc.enableChosen()`n
+SendInput {space 2}{}},`n
+SendInput `n
+SendInput {space 2}assignInitialHandlers: () => {{}`n
+SendInput {space 4}`n
+SendInput {space 2}{}},`n
+SendInput `n
+SendInput {space 2}enableChosen: () => {{}`n
+SendInput {space 4}let chosenOptions = {{}`n
+SendInput {space 6}search_contains: true`n
+SendInput {space 4}{}}`n
+SendInput {space 4}$("{#}order-type-select").chosen(chosenOptions)`n
+SendInput {space 4}$("{#}order_type_select_chosen").css("width", "300px")`n
+SendInput {space 2}{}},`n
+SendInput `n
+SendInput {space 2}array: [],`n
+SendInput `n
+SendInput {}}`n
 return
 
 ::tpgruntfile::
