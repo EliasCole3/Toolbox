@@ -357,27 +357,44 @@ var ebot = {
   },
   
   //http://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript
-  dynamicSort: function(arrayOfObjects, propertyToSortBy, propertyType) {
+  dynamicSort: function(arrayOfObjects, propertyToSortBy, propertyType, ascending) {
+    var asc = ascending !== undefined ? ascending : true;
 
     function compare(a,b) {
-      if (a[propertyToSortBy] < b[propertyToSortBy])
-        return -1;
-      if (a[propertyToSortBy] > b[propertyToSortBy])
-        return 1;
-      return 0;
+      if(asc) {
+        if (a[propertyToSortBy] < b[propertyToSortBy])
+          return -1;
+        if (a[propertyToSortBy] > b[propertyToSortBy])
+          return 1;
+        return 0;
+      } else {
+        if (a[propertyToSortBy] > b[propertyToSortBy])
+          return -1;
+        if (a[propertyToSortBy] < b[propertyToSortBy])
+          return 1;
+        return 0;
+      }
     }
     
     function compare2(a,b) {
       var value1 = moment(a[propertyToSortBy]);
       var value2 = moment(b[propertyToSortBy]);
-      if(value1.isAfter(value2))
-        return -1;
-      if(value1.isBefore(value2))
-        return 1;
-      return 0;
+      if(asc) {
+        if(value1.isAfter(value2))
+          return -1;
+        if(value1.isBefore(value2))
+          return 1;
+        return 0;
+      } else {
+        if(value1.isBefore(value2))
+          return -1;
+        if(value1.isAfter(value2))
+          return 1;
+        return 0;
+      }
     }
         
-    if(propertyType !== "undefined" && propertyType === "date") {
+    if(propertyType === "date") {
       arrayOfObjects.sort(compare2);
     } else {
       arrayOfObjects.sort(compare);
