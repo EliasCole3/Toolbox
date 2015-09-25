@@ -57,6 +57,7 @@ SendInput chosenupdated`n
 SendInput jjhs`n
 SendInput jjwidgetstart`n
 SendInput jjsr`n
+SendInput jjsso`n
 SendInput jjcfirst`n
 SendInput jjmakeelement`n
 SendInput shaliaseswork`n
@@ -550,6 +551,10 @@ sed -i 's/<<entityUnderscore>>/entity_key/g' work-order-planner.js
 SendInput site:reddit.com
 return
 
+:*:jjsso::
+SendInput site:stackoverflow.com
+return
+
 :*:jjcfirst::
 SendInput ssh bilbo@192.241.203.33
 return
@@ -574,6 +579,7 @@ SendInput alias berrystack="cd ~/workspace/app-berrystack"`n
 SendInput alias bs="cd ~/workspace/app-berrystack"`n
 SendInput alias sublimeopen="'C:\Program Files\Sublime Text 2\sublime_text.exe'"`n
 SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}.exe'"`n
+SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
 SendInput clear`n
 return
 
@@ -588,7 +594,12 @@ SendInput alias bs="cd ~/workspace/app-berrystack"`n
 SendInput alias sublimeopen="'C:\Program Files\Sublime Text 2\sublime_text.exe'"`n
 SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}.exe'"`n
 SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
-SendInput clear`n
+SendInput alias hostgator="ssh -p 2222 elias@198.57.247.143"`n
+SendInput alias droplet1="ssh bilbo@192.241.203.33"`n
+return
+
+:*:shaliaseshostgator::
+SendInput alias composer="php composer.phar"`n
 return
 
 
