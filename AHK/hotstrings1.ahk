@@ -569,7 +569,7 @@ SendInput {space 2}"custom-attr": customAttrValue`n
 SendInput {}});`n
 return
 
-::shaliaseswork::
+::shawork::
 SendInput alias ls="ls -al"`n
 SendInput alias www="cd /c/wamp/www"`n
 SendInput alias new="cd /c/wamp/www/New"`n
@@ -598,7 +598,11 @@ SendInput alias hostgator="ssh -p 2222 elias@198.57.247.143"`n
 SendInput alias droplet1="ssh bilbo@192.241.203.33"`n
 return
 
-:*:shaliaseshostgator::
+:*:shahostgator::
+SendInput alias composer="php composer.phar"`n
+return
+
+:*:shadroplet1::
 SendInput alias composer="php composer.phar"`n
 return
 
