@@ -193,9 +193,23 @@ Return String
 
 }
 
+; this one works a little differently
+; you copy the text you want inflected, and then hit the hot key combo, 
+; it modifies the text in the copy buffer, and then you can paste it back out where you want it
+; that's the way it originally worked, I hacked it
+^!k::                                           ; Sentence case
+SendInput, ^c
+StringLower, Clipboard, Clipboard
+; Clipboard := RegExReplace(Clipboard, "((?:^|[.!?]\s+)[a-z])", "$u1")
+Clipboard := RegExReplace(Clipboard, "\s|-", "_")
+Send %Clipboard%
+; SendInput, ^v
+RETURN
 
-
-
+; TempText := RegExReplace(TempText, "((^|[.!?]\s+)[a-z])", "$u1")
+; So in English, that's: ((the begining OR [one of ., ! or ?] and one or more whitespace characters) followed by a letter)
+; RegExReplace(Clipboard, "(((^|([.!?]+\s+))[a-z])|\Wi\W)", "$u1")
+; Send, % RegExReplace(clipboard, "\s", "")
 
 
 
