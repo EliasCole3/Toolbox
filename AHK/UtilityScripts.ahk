@@ -23,11 +23,11 @@ return
 
 ;————————————————————————————————————————————-
 
-; CONTROL T - CONVERT SELECTED TEXT OR LINE TO TITLE CASE
+; CONTROL ALT T - CONVERT SELECTED TEXT OR LINE TO TITLE CASE
 
 ;————————————————————————————————————————————-
 
-^t::
+^!t::
 
 Clipboard =
 
@@ -69,11 +69,11 @@ return
 
 ;————————————————————————————————————————————-
 
-; CONTROL U - CONVERT SELECTED TEXT OR LINE TO UPPER CASE
+; CONTROL ALT U - CONVERT SELECTED TEXT OR LINE TO UPPER CASE
 
 ;————————————————————————————————————————————-
 
-^u::
+^!u::
 
 Clipboard =
 
@@ -115,11 +115,11 @@ return
 
 ;————————————————————————————————————————————-
 
-; CONTROL L - CONVERT SELECTED TEXT OR LINE TO LOWER CASE
+; CONTROL ALT L - CONVERT SELECTED TEXT OR LINE TO LOWER CASE
 
 ;————————————————————————————————————————————-
 
-^l::
+^!l::
 
 Clipboard =
 
