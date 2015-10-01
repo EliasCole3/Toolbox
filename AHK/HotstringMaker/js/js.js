@@ -39,7 +39,7 @@ $(function() {
     var output = array.join("\n");
     
     $("#output").val(output);
-    
+     
   });
   
 });
