@@ -200,7 +200,7 @@ Return String
 ^!k::                                           ; Sentence case
 SendInput, ^c
 StringLower, Clipboard, Clipboard
-; Clipboard := RegExReplace(Clipboard, "((?:^|[.!?]\s+)[a-z])", "$u1")
+; Clipboard := RegExReplace(Clipboard, "((?:^|[.!?]\s+)[a-z])", "$u1") ;$U1 = fill the erased stuff in group 1 with the same content and make it UPPERCASE
 Clipboard := RegExReplace(Clipboard, "\s|-", "_")
 Send %Clipboard%
 ; SendInput, ^v
