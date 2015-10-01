@@ -581,6 +581,7 @@ SendInput alias sublimeopen="'C:\Program Files\Sublime Text 2\sublime_text.exe'"
 SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}.exe'"`n
 SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
 SendInput clear`n
+SendInput alias ..="cd .."`n
 return
 
 ::gogo::
@@ -596,14 +597,17 @@ SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}
 SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
 SendInput alias hostgator="ssh -p 2222 elias@198.57.247.143"`n
 SendInput alias droplet1="ssh bilbo@192.241.203.33"`n
+SendInput alias ..="cd .."`n
 return
 
 :*:shahostgator::
 SendInput alias composer="php composer.phar"`n
+SendInput alias ..="cd .."`n
 return
 
 :*:shadroplet1::
-SendInput alias composer="php composer.phar"`n
+SendInput alias composer="php ~/composer.phar"`n
+SendInput alias ..="cd .."`n
 return
 
 
