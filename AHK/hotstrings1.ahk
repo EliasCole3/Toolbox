@@ -661,6 +661,18 @@ SendInput $.when.apply($, deferreds).done(() => {{}{}})
 Send {Left 2}
 return
 
+:*:estoggleflag::
+SendInput let flag = true`n
+SendInput `n
+SendInput if(flag) {{}`n
+SendInput `n
+SendInput {}} else {{}`n
+SendInput `n
+SendInput {}}`n
+SendInput `n
+SendInput flag = {!}flag`n
+return
+
 :*:eswidgetstart::
 SendInput $(() => {{}`n
 SendInput {space 2}abc.initialize()`n

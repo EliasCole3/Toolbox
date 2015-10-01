@@ -13,6 +13,14 @@ return
 #IfWinActive
 
 
+
+
+
+
+
+
+
+
 ;————————————————————————————————————————————-
 
 ; CONTROL T - CONVERT SELECTED TEXT OR LINE TO TITLE CASE
@@ -184,3 +192,62 @@ String := RegExReplace(String,"i)\b" A_LoopField "\b", A_LoopField)
 Return String
 
 }
+
+
+
+
+
+
+
+
+; Open Snipping Tool, create a new snip 
+; ^PrintScreen:: RunWait, %A_WinDir%\system32\SnippingTool.exe 
+
+;^PrintScreen:: 
+
+; RunWait, "C:\Windows\system32\SnippingTool.exe" 
+; RunWait, "\system32\SnippingTool.exe", "C:\Windows" 
+; RunWait, C:\Windows\Notepad.exe ;this works fine
+; RunWait, C:\Windows\System32\SoundRecorder.exe
+; RunWait, .\..\..\..\..\Windows\System32\SnippingTool.exe
+; RunWait, SnippingTool.exe
+
+;SendInput !{n} 
+;return
+
+
+; PRINTSCREEN::
+; Run, "C:\Windows\System32\SnippingTool.exe"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
