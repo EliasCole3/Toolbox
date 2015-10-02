@@ -193,18 +193,43 @@ Return String
 
 }
 
-; this one works a little differently
-; you copy the text you want inflected, and then hit the hot key combo, 
-; it modifies the text in the copy buffer, and then you can paste it back out where you want it
-; that's the way it originally worked, I hacked it
-^!k::                                           ; Sentence case
+
+; Sentence case - ctrl alt s
+^!s::                                           
 SendInput, ^c
 StringLower, Clipboard, Clipboard
-; Clipboard := RegExReplace(Clipboard, "((?:^|[.!?]\s+)[a-z])", "$u1") ;$U1 = fill the erased stuff in group 1 with the same content and make it UPPERCASE
+Clipboard := RegExReplace(Clipboard, "((?:^|[.!?]\s+)[a-z])", "$u1") ;$U1 = fill the erased stuff in group 1 with the same content and make it UPPERCASE
+Send %Clipboard%
+RETURN
+
+
+; underscore case - ctrl alt shift {dash}
+^!+-::                                           
+SendInput, ^c
+StringLower, Clipboard, Clipboard
 Clipboard := RegExReplace(Clipboard, "\s|-", "_")
 Send %Clipboard%
-; SendInput, ^v
 RETURN
+
+; dash case - ctrl alt {dash}
+^!-::                                           
+SendInput, ^c
+StringLower, Clipboard, Clipboard
+Clipboard := RegExReplace(Clipboard, "\s|_", "-")
+Send %Clipboard%
+RETURN
+
+; remove dash and underscore - ctrl alt r
+^!r::                                           
+SendInput, ^c
+StringLower, Clipboard, Clipboard
+Clipboard := RegExReplace(Clipboard, "-|_", " ")
+Send %Clipboard%
+RETURN
+
+
+
+
 
 ; TempText := RegExReplace(TempText, "((^|[.!?]\s+)[a-z])", "$u1")
 ; So in English, that's: ((the begining OR [one of ., ! or ?] and one or more whitespace characters) followed by a letter)
