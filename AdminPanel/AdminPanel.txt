@@ -1,0 +1,134 @@
+  let htmlString = `
+    <div id='admin-panel' class='my-hidden'>
+      <div id='left' class='admin-panel'>
+        <button id='one' class='btn btn-lg'>one</button> <br>
+        <button id='two' class='btn btn-lg'>two</button> <br>
+        <button id='three' class='btn btn-lg'>three</button> <br>
+        <button id='four' class='btn btn-lg'>four</button> <br>
+      </div>
+      <div id='right' class='admin-panel'>
+        <button id='one' class='btn btn-lg'>one</button> <br>
+        <button id='two' class='btn btn-lg'>two</button> <br>
+        <button id='three' class='btn btn-lg'>three</button> <br>
+        <button id='four' class='btn btn-lg'>four</button> <br>
+      </div>
+      <div id='bottom' class='admin-panel'>
+        <button id='one' class='btn btn-lg'>one</button>
+        <button id='two' class='btn btn-lg'>two</button>
+        <button id='three' class='btn btn-lg'>three</button>
+        <button id='four' class='btn btn-lg'>four</button>
+      </div>
+    </div>
+  `
+  $("body").append(htmlString)
+
+
+
+    let listener = new window.keypress.Listener()
+    let flag2 = true
+    listener.sequence_combo("a d m i n p a n e l", function() {
+
+      if(flag2) {
+
+        ebot.notify("Systems initializing...")
+
+        $("#left").css("transform", "perspective(1000px) rotateY(0deg) translateX(-200px)")
+        $("#right").css("transform", "perspective(1000px) rotateY(0deg) translateX(-200px)")
+        $("#bottom").css("transform", "perspective(1000px) rotateX(0deg) translateY(200px)")
+
+        $("#admin-panel").removeClass("my-hidden")
+
+        $("#left")
+          .velocity({translateX: -200, rotateY: 0, opacity: 1}, {duration: 0}) //reset
+          .velocity({translateX: 0}, {duration: duration})
+          .velocity({rotateY: "35deg"}, {duration: duration})
+          .velocity({opacity: 0}, {duration: duration2, complete: () => {
+            $("#left").css("transform", "perspective(1000px) rotateY(35deg)")}})
+          .velocity({opacity: 1}, {duration: duration2})
+
+        $("#right")
+          .velocity({translateX: 200, rotateY: 0, opacity: 1}, {duration: 0}) //reset
+          .velocity({translateX: 0}, {duration: duration})
+          .velocity({rotateY: "-35deg"}, {duration: duration})
+          .velocity({opacity: 0}, {duration: duration2, complete: () => {
+            $("#right").css("transform", "perspective(1000px) rotateY(-35deg)")}})
+          .velocity({opacity: 1}, {duration: duration2})
+
+        $("#bottom")
+          .velocity({translateY: 200, rotateX: 0, opacity: 1}, {duration: 0}) //reset
+          .velocity({translateY: 0}, {duration: duration})
+          .velocity({rotateX: "35deg"}, {duration: duration})
+          .velocity({opacity: 0}, {duration: duration2, complete: () => {
+            $("#bottom").css("transform", "perspective(1000px) rotateX(35deg)")}})
+          .velocity({opacity: 1}, {duration: duration2, complete: () => {
+            ebot.notify("Systems online commander")
+          }})
+
+        
+
+      } else {
+        $("#left").velocity({opacity: 0}, {complete: () => {
+            $("#right").velocity({opacity: 0}, {complete: () => {
+                $("#bottom").velocity({opacity: 0}, {complete: () => {
+                  $("#admin-panel").addClass("my-hidden")
+                }})
+             }})
+          }})
+
+        
+      }
+
+      flag2 = !flag2
+      
+    }, true);
+
+
+
+
+
+.admin-panel {
+	position: fixed;
+	opacity: .8;
+	background-color: darkgrey;
+	z-index: 1000;
+}
+
+#top {
+	top: -1.3%;
+	height: 15%;
+  width: 94%;
+  left: 3%;
+	transform: perspective(1000px) rotateX( -35deg );
+	background: linear-gradient(200deg, #7db9e8, #1e5799);
+}
+
+#left {
+  left: -1.4%;
+  top: 15%;
+  height: 70%;
+  width: 15%;
+  transform: perspective(1000px) rotateY( 35deg );
+  background: linear-gradient(100deg, #1e5799, #7db9e8);
+}
+
+#right {
+  right: -1.3%;
+  top: 15%;
+  height: 70%;
+  width: 15%;
+  transform: perspective(1000px) rotateY( -35deg );
+  background: linear-gradient(100deg, #7db9e8, #1e5799);
+}
+
+#bottom {
+  bottom: -1%;
+  height: 15%;
+  width: 94%;
+  left: 3%;
+  transform: perspective(1000px) rotateX( 35deg );
+  background: linear-gradient(200deg, #1e5799, #7db9e8);
+}
+
+.my-hidden {
+	display: none;
+}

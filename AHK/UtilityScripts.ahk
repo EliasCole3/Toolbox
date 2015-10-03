@@ -13,13 +13,21 @@ return
 #IfWinActive
 
 
+
+
+
+
+
+
+
+
 ;————————————————————————————————————————————-
 
-; CONTROL T - CONVERT SELECTED TEXT OR LINE TO TITLE CASE
+; CONTROL ALT T - CONVERT SELECTED TEXT OR LINE TO TITLE CASE
 
 ;————————————————————————————————————————————-
 
-^t::
+^!t::
 
 Clipboard =
 
@@ -61,11 +69,11 @@ return
 
 ;————————————————————————————————————————————-
 
-; CONTROL U - CONVERT SELECTED TEXT OR LINE TO UPPER CASE
+; CONTROL ALT U - CONVERT SELECTED TEXT OR LINE TO UPPER CASE
 
 ;————————————————————————————————————————————-
 
-^u::
+^!u::
 
 Clipboard =
 
@@ -107,11 +115,11 @@ return
 
 ;————————————————————————————————————————————-
 
-; CONTROL L - CONVERT SELECTED TEXT OR LINE TO LOWER CASE
+; CONTROL ALT L - CONVERT SELECTED TEXT OR LINE TO LOWER CASE
 
 ;————————————————————————————————————————————-
 
-^l::
+^!l::
 
 Clipboard =
 
@@ -184,3 +192,101 @@ String := RegExReplace(String,"i)\b" A_LoopField "\b", A_LoopField)
 Return String
 
 }
+
+
+; Sentence case - ctrl alt s
+^!s::                                           
+SendInput, ^c
+StringLower, Clipboard, Clipboard
+Clipboard := RegExReplace(Clipboard, "((?:^|[.!?]\s+)[a-z])", "$u1") ;$U1 = fill the erased stuff in group 1 with the same content and make it UPPERCASE
+Send %Clipboard%
+RETURN
+
+
+; underscore case - ctrl alt shift {dash}
+^!+-::                                           
+SendInput, ^c
+StringLower, Clipboard, Clipboard
+Clipboard := RegExReplace(Clipboard, "\s|-", "_")
+Send %Clipboard%
+RETURN
+
+; dash case - ctrl alt {dash}
+^!-::                                           
+SendInput, ^c
+StringLower, Clipboard, Clipboard
+Clipboard := RegExReplace(Clipboard, "\s|_", "-")
+Send %Clipboard%
+RETURN
+
+; remove dash and underscore - ctrl alt r
+^!r::                                           
+SendInput, ^c
+StringLower, Clipboard, Clipboard
+Clipboard := RegExReplace(Clipboard, "-|_", " ")
+Send %Clipboard%
+RETURN
+
+
+
+
+
+; TempText := RegExReplace(TempText, "((^|[.!?]\s+)[a-z])", "$u1")
+; So in English, that's: ((the begining OR [one of ., ! or ?] and one or more whitespace characters) followed by a letter)
+; RegExReplace(Clipboard, "(((^|([.!?]+\s+))[a-z])|\Wi\W)", "$u1")
+; Send, % RegExReplace(clipboard, "\s", "")
+
+
+
+
+; Open Snipping Tool, create a new snip 
+; ^PrintScreen:: RunWait, %A_WinDir%\system32\SnippingTool.exe 
+
+;^PrintScreen:: 
+
+; RunWait, "C:\Windows\system32\SnippingTool.exe" 
+; RunWait, "\system32\SnippingTool.exe", "C:\Windows" 
+; RunWait, C:\Windows\Notepad.exe ;this works fine
+; RunWait, C:\Windows\System32\SoundRecorder.exe
+; RunWait, .\..\..\..\..\Windows\System32\SnippingTool.exe
+; RunWait, SnippingTool.exe
+
+;SendInput !{n} 
+;return
+
+
+; PRINTSCREEN::
+; Run, "C:\Windows\System32\SnippingTool.exe"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
