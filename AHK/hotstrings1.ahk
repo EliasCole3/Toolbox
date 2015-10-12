@@ -601,6 +601,7 @@ SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}
 SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
 SendInput alias hostgator="ssh -p 2222 elias@198.57.247.143"`n
 SendInput alias droplet1="ssh bilbo@192.241.203.33"`n
+SendInput alias orange="ssh eliascol@gauntlet.asoshared.com"`n
 return
 
 :*:shahostgator::
