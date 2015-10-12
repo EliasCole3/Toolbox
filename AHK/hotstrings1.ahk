@@ -653,8 +653,11 @@ SendInput {}})`n
 return
 
 :*:esclick::
-SendInput $("").click(() => {{}{}})
+SendInput $("").click(e => {{}{}})
 Send {Left 2}
+Send {Enter}
+SendInput let element = $(e.currentTarget)
+Send {Enter}
 return
 
 :*:eschange::
