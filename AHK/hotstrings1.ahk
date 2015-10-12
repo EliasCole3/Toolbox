@@ -586,7 +586,7 @@ SendInput clear`n
 return
 
 ::gogo::
-SendInput alias ls="ls -al"`n
+; SendInput alias ls="ls -al"`n
 SendInput alias ..="cd .."`n
 SendInput alias www="cd /c/wamp/www"`n
 SendInput alias new="cd /c/wamp/www/New"`n
@@ -594,6 +594,7 @@ SendInput alias workspace="cd ~/workspace"`n
 SendInput alias ws="cd ~/workspace"`n
 SendInput alias berrystack="cd ~/workspace/app-berrystack"`n
 SendInput alias labcloud="cd ~/workspace/labcloud"`n
+SendInput alias toolbox="cd ~/Desktop/Toolbox"`n
 SendInput alias bs="cd ~/workspace/app-berrystack"`n
 SendInput alias sublimeopen="'C:\Program Files\Sublime Text 2\sublime_text.exe'"`n
 SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}.exe'"`n
