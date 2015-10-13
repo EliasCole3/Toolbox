@@ -587,7 +587,7 @@ SendInput alias ..="cd .."`n
 return
 
 ::gogo::
-SendInput alias ls="ls -al"`n
+; SendInput alias ls="ls -al"`n
 SendInput alias ..="cd .."`n
 SendInput alias www="cd /c/wamp/www"`n
 SendInput alias new="cd /c/wamp/www/New"`n
@@ -595,6 +595,7 @@ SendInput alias workspace="cd ~/workspace"`n
 SendInput alias ws="cd ~/workspace"`n
 SendInput alias berrystack="cd ~/workspace/app-berrystack"`n
 SendInput alias labcloud="cd ~/workspace/labcloud"`n
+SendInput alias toolbox="cd ~/Desktop/Toolbox"`n
 SendInput alias bs="cd ~/workspace/app-berrystack"`n
 SendInput alias sublimeopen="'C:\Program Files\Sublime Text 2\sublime_text.exe'"`n
 SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}.exe'"`n
@@ -602,6 +603,7 @@ SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
 SendInput alias hostgator="ssh -p 2222 elias@198.57.247.143"`n
 SendInput alias droplet1="ssh bilbo@192.241.203.33"`n
 SendInput alias ..="cd .."`n
+SendInput alias orange="ssh eliascol@gauntlet.asoshared.com"`n
 return
 
 :*:shahostgator::
@@ -655,8 +657,11 @@ SendInput {}})`n
 return
 
 :*:esclick::
-SendInput $("").click(() => {{}{}})
+SendInput $("").click(e => {{}{}})
 Send {Left 2}
+Send {Enter}
+SendInput let element = $(e.currentTarget)
+Send {Enter}
 return
 
 :*:eschange::

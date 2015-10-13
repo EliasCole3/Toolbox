@@ -87,12 +87,39 @@ var ebot = {
     }).promise();
   },
   
+  /*
+   * {
+   *  obj: obj,
+   *  url: url,
+   *  propName: propName,
+   *  queryString: queryString
+   * }
+   * 
+   */
   retrieveModelIfNotLoadedv2: function(options) {
     var propName = typeof(options.propName) === "undefined" ? options.url : options.propName;
     if(options.obj[propName].length === 0) {
       return ebot.retrieveModelv2(options);
     }
     return $.Deferred().resolve().promise();
+  },
+
+  /*
+   * {
+   *  model: "workOrders",
+   *  queryString: "?before=2015-10-07"
+   * }
+   * 
+   */
+  getModel: function(options) {
+    var queryString = typeof(options.queryString) === "undefined" ? "" : options.queryString;
+    var deferred = $.ajax({
+      type: "GET",
+      url: env.getApiUri() + "/" + options.model + queryString,
+      success: function(data, status, jqXHR) {},
+      error: function(jqXHR, status) {}
+    }).promise();
+    return deferred;
   },
 
   /**
@@ -102,6 +129,8 @@ var ebot = {
    * 
    */
   showModal: function(headerText, formHtml) {
+    headerText = headerText || "";
+    formHtml = formHtml || "";
     $("#error-message-div").addClass("hide");
     $("#form-target").html(formHtml);
     $("#modal-header").html("<h4>" + headerText + "</h4>");
@@ -116,6 +145,16 @@ var ebot = {
    */
   hideModal: function() {
     $("#modal").modal("hide");
+  },
+  
+  /**
+   * Requires:
+   * 
+   * insertModalHtml()
+   * 
+   */
+  changeModalView: function(htmlString) {
+    $("#form-target").html(htmlString);
   },
 
   /**
@@ -191,10 +230,51 @@ var ebot = {
     }
     
     $("#notifications").show(); //necessary?
-
+    
     var rand = ebot.getRandomInt(0, 999999);
     htmlString = "<div id='falling-cherry-blossom-" + rand + "' style='display:hidden;'><label>" + message + "</label><br /></div>";
     $("#notifications").append(htmlString);
+    $("#falling-cherry-blossom-" + rand).show(ebot.showOptions);
+    
+    setTimeout(function() {
+      $("#falling-cherry-blossom-" + rand).hide(ebot.hideOptionsLong);
+    }, hideTime);
+    
+    setTimeout(function() {
+      $("#falling-cherry-blossom-" + rand).remove();
+    }, hideTime + 500);
+    
+  },
+  
+  /**
+   * Requires: 
+   * 
+   * an element with id="notifications-modal"
+   * <div id='notifications-modal'></div>
+   * 
+#notifications-modal {
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  text-align: center;
+  min-height: 20px;
+  height: auto;
+}
+   * 
+   */
+  notifyModal: function(message, hideTime) {
+    
+    if(typeof(hideTime) !== "undefined") {
+      hideTime = +hideTime;
+    } else {
+      hideTime = 5000;
+    }
+    
+    $("#notifications-modal").show(); //necessary?
+
+    var rand = ebot.getRandomInt(0, 999999);
+    htmlString = "<div id='falling-cherry-blossom-" + rand + "' style='display:hidden;'><label>" + message + "</label><br /></div>";
+    $("#notifications-modal").append(htmlString);
     $("#falling-cherry-blossom-" + rand).show(ebot.showOptions);
     
     setTimeout(function() {
@@ -250,13 +330,15 @@ var ebot = {
    * an element with id="modal-holder"
    * 
    */
-  insertModalHtml: function() {
+  insertModalHtml: function(size) {
+    var _size = size === undefined ? "" : size
     var htmlString = "" + 
     "<div id='modal' class='modal fade'>" +
-    "  <div class='modal-dialog'>" +
+    "  <div class='modal-dialog " + _size + "'>" +
     "    <div class='modal-content'>" +
     "      <div id='modal-header' class='modal-header'></div>" +
     "      <div id='modal-body' class='modal-body'>" +
+    "        <div id='notifications-modal'></div> " +
     "        <div id='error-message-div' class='hide'> " +
     "          <div class='alert alert-danger' role='alert'> " +
     "            <span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span> " +
@@ -360,7 +442,7 @@ var ebot = {
   dynamicSort: function(arrayOfObjects, propertyToSortBy, propertyType, ascending) {
     var asc = ascending !== undefined ? ascending : true;
 
-    function compare(a,b) {
+    function compare(a, b) {
       if(asc) {
         if (a[propertyToSortBy] < b[propertyToSortBy])
           return -1;
@@ -376,7 +458,7 @@ var ebot = {
       }
     }
     
-    function compare2(a,b) {
+    function compare2(a, b) {
       var value1 = moment(a[propertyToSortBy]);
       var value2 = moment(b[propertyToSortBy]);
       if(asc) {
@@ -439,7 +521,7 @@ var ebot = {
   
   loadKirby: function(selector) {
     if((env.getApiUri()).indexOf("staging") > -1) {
-      var htmlString = "<img src='images/Dancing_kirby.gif' style='height: 50px;'>";
+      var htmlString = "<img id='kirby' src='images/Dancing_kirby.gif' style='height: 50px;'>";
       if(selector === undefined) {
         $("#footerwrap .container").html(htmlString);
       } else {
@@ -480,6 +562,65 @@ var ebot = {
 
       ebot.switchExpandButtonSigns(this)
     })
+  },
+  
+  /**
+   * needs this css: 
+   * 
+     #drawer-handle {
+        width: 50px;
+        margin: 0 auto;
+      }
+      
+      #drawer-handle i {
+        font-size: 35px;
+        opacity: .4;
+      }
+      
+      #drawer-handle i:hover {
+        -webkit-filter: invert(20%);
+      }
+   */
+  drawerify: function(options) {
+    var drawer = $(options.selector);
+    var drawerContents = $(options.contents);
+    var drawerVisible = false;
+    var drawerHeight = drawer.height();
+
+    drawer
+      .after("<div id='drawer-handle'><i class='glyphicon glyphicon-chevron-down'></i></div>")
+      .css("opacity", 0)
+      .css("height", "0px");
+
+    drawerContents
+      .css("opacity", 0);
+
+    var drawerHandleContainer = $("#drawer-handle");
+    var drawerHandle = $("#drawer-handle i");
+
+    $("#drawer-handle i").click(function() {
+      if(!drawerVisible) {
+        drawer.velocity({
+          height: `${drawerHeight}px`,
+          opacity: 1
+        },
+        {
+          complete: function(elements) { 
+            drawerContents.velocity({opacity: 1})
+          }
+        });
+        drawerHandle.removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
+        drawerVisible = true;
+      } else {
+        drawerContents.css("opacity", 0);
+        drawer.velocity({
+          height: `0px`,
+          opacity: 0
+        });
+        drawerHandle.removeClass("glyphicon-chevron-up").addClass("glyphicon-chevron-down");
+        drawerVisible = false;
+      }
+    });
   },
 
   chosenOptions: {
