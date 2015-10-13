@@ -606,13 +606,14 @@ var ebot = {
         },
         {
           complete: function(elements) { 
+            drawerContents.css("display", "block")
             drawerContents.velocity({opacity: 1})
           }
         });
         drawerHandle.removeClass("glyphicon-chevron-down").addClass("glyphicon-chevron-up");
         drawerVisible = true;
       } else {
-        drawerContents.css("opacity", 0);
+        drawerContents.css("opacity", 0).css("display", "none");
         drawer.velocity({
           height: `0px`,
           opacity: 0
@@ -621,6 +622,29 @@ var ebot = {
         drawerVisible = false;
       }
     });
+  },
+  
+  makeSelectOutOfArrayOfModels: function(arrayOfModels, modelName, selectProps, optionToSelect) {
+    var formField = "<select ";
+    
+    for(prop in selectProps) {
+      formField += prop + "='" + selectProps[prop] + "' ";
+    }
+    
+    formField += ">";
+    
+    arrayOfModels.forEach(function(model) {
+      if(optionToSelect === model[modelName + "_id"]) {
+        formField += "<option value='" + model[modelName + "_id"] + "' selected>" + model.name + "</option>";
+      } else {
+        formField += "<option value='" + model[modelName + "_id"] + "'>" + model.name + "</option>";
+      }
+      
+    });
+
+    formField += "</select>";
+    
+    return formField;
   },
 
   chosenOptions: {
