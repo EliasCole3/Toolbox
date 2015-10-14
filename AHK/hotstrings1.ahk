@@ -250,7 +250,10 @@ SendInput ebot.notify("");
 Send {Left 3}
 return
 
-
+:*:jjglyph::
+SendInput <i class='glyphicon glyphicon-'></i>
+Send {Left 6}
+return
 
 :*:jqclick::
 SendInput $("").click(function() {{}{}});
@@ -349,8 +352,6 @@ SendInput     console.log("Error");`n
 SendInput   {}}`n
 SendInput {}});`n
 return
-
-
 
 :*:jjcommit::
 SendInput git commit -a -m "" 
