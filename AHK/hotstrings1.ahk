@@ -687,6 +687,29 @@ SendInput `n
 SendInput flag = {!}flag`n
 return
 
+:*:esconvar::
+SendInput console.log(``temp: ${{}temp{}}``)
+Send {Left 11}
+Send {Shift Down}
+Send {Left 4}
+Send {Shift Up}
+Send {Ctrl Down}
+Send {Shift Down}
+Send {d}
+Send {Ctrl Up}
+Send {Shift Up}
+Send {Ctrl Down}
+Send {v}
+Send {Ctrl Up}
+return
+
+:*:eshtmlfun::
+SendInput let htmlString = `````n`n`n`n
+SendInput return htmlString
+Send {Up 2}
+Send {Tab}
+return
+
 :*:eswidgetstart::
 SendInput $(() => {{}`n
 SendInput {space 2}abc.initialize()`n

@@ -1,25 +1,25 @@
   let htmlString = `
-    <div id='admin-panel' class='my-hidden'>
-      <div id='left' class='admin-panel'>
-        <button id='one' class='btn btn-lg'>one</button> <br>
-        <button id='two' class='btn btn-lg'>two</button> <br>
-        <button id='three' class='btn btn-lg'>three</button> <br>
-        <button id='four' class='btn btn-lg'>four</button> <br>
+      <div id='admin-panel' class='my-hidden'>
+        <div id='left' class='admin-panel'>
+          <button id='left-one' class='btn btn-lg'>one</button> <br>
+          <button id='left-two' class='btn btn-lg'>two</button> <br>
+          <button id='left-three' class='btn btn-lg'>three</button> <br>
+          <button id='left-four' class='btn btn-lg'>Clear</button> <br>
+        </div>
+        <div id='right' class='admin-panel'>
+          <button id='right-one' class='btn btn-lg'>one</button> <br>
+          <button id='right-two' class='btn btn-lg'>two</button> <br>
+          <button id='right-three' class='btn btn-lg'>three</button> <br>
+          <button id='right-four' class='btn btn-lg'>four</button> <br>
+        </div>
+        <div id='bottom' class='admin-panel'>
+          <button id='bottom-one' class='btn btn-lg'>one</button>
+          <button id='bottom-two' class='btn btn-lg'>two</button>
+          <button id='bottom-three' class='btn btn-lg'>three</button>
+          <button id='bottom-four' class='btn btn-lg'>four</button>
+        </div>
       </div>
-      <div id='right' class='admin-panel'>
-        <button id='one' class='btn btn-lg'>one</button> <br>
-        <button id='two' class='btn btn-lg'>two</button> <br>
-        <button id='three' class='btn btn-lg'>three</button> <br>
-        <button id='four' class='btn btn-lg'>four</button> <br>
-      </div>
-      <div id='bottom' class='admin-panel'>
-        <button id='one' class='btn btn-lg'>one</button>
-        <button id='two' class='btn btn-lg'>two</button>
-        <button id='three' class='btn btn-lg'>three</button>
-        <button id='four' class='btn btn-lg'>four</button>
-      </div>
-    </div>
-  `
+    `
   $("body").append(htmlString)
 
 
@@ -62,6 +62,7 @@
             $("#bottom").css("transform", "perspective(1000px) rotateX(35deg)")}})
           .velocity({opacity: 1}, {duration: duration2, complete: () => {
             ebot.notify("Systems online commander")
+            abc.assignHandlersAdminPanel()
           }})
 
         
@@ -81,6 +82,40 @@
       flag2 = !flag2
       
     }, true);
+
+
+
+
+
+
+
+
+  assignHandlersAdminPanel: () => {
+    $("#left-one").click(e => {
+      let ranTop = ebot.getRandomInt(100, 800)
+      let ranLeft = ebot.getRandomInt(100, 800)
+      let htmlString = `<img src='images/fireworks/fireworks1.gif' class='fireworks' width='100' height='100' style='position:absolute; top:${ranTop}px; left:${ranLeft}px;'>`
+      $("body").append(htmlString)
+    })
+
+   $("#left-two").click(e => {
+      let ranTop = ebot.getRandomInt(100, 800)
+      let ranLeft = ebot.getRandomInt(100, 800)
+      let htmlString = `<img src='images/fireworks/fireworks2.gif' class='fireworks' width='100' height='100' style='position:absolute; top:${ranTop}px; left:${ranLeft}px;'>`
+      $("body").append(htmlString)
+    })
+
+   $("#left-three").click(e => {
+      let ranTop = ebot.getRandomInt(100, 800)
+      let ranLeft = ebot.getRandomInt(100, 800)
+      let htmlString = `<img src='images/fireworks/fireworks3.gif' class='fireworks' width='100' height='100' style='position:absolute; top:${ranTop}px; left:${ranLeft}px;'>`
+      $("body").append(htmlString)
+    })
+
+    $("#left-four").click(e => {
+      $(".fireworks").remove()
+    })
+  },
 
 
 

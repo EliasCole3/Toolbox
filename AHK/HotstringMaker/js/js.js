@@ -13,12 +13,14 @@ $(function() {
     hotstring = hotstring.replace(/#/g, "placeholder3");
     hotstring = hotstring.replace(/\+/g, "placeholder4");
     hotstring = hotstring.replace(/\!/g, "placeholder5");
+    hotstring = hotstring.replace(/`/g, "placeholder6");
     
     hotstring = hotstring.replace(/placeholder1/g, "{{}");
     hotstring = hotstring.replace(/placeholder2/g, "{}}");
     hotstring = hotstring.replace(/placeholder3/g, "{#}");
     hotstring = hotstring.replace(/placeholder4/g, "{+}");
     hotstring = hotstring.replace(/placeholder5/g, "{!}");
+    hotstring = hotstring.replace(/placeholder6/g, "``");
     
     //indenting
     hotstring = hotstring.replace(/  /g, "{space 2}");
