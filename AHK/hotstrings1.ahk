@@ -833,6 +833,11 @@ SendInput {}};`n
 SendInput `n
 return
 
+:R*?:ddd::
+FormatTime, CurrentDateTime,, MM.dd.yy
+SendInput %CurrentDateTime%
+return
+
 
 /*
 :?*:email::
