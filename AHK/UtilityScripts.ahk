@@ -15,10 +15,13 @@ return
 
 
 
-
-
-
-
+; lower case - control alt l
+; upper case - control alt u
+; title case - control alt t
+; dash case - ctrl alt {dash}
+; underscore case - ctrl alt shift {dash}
+; Sentence case - ctrl alt s
+; remove dash and underscore - ctrl alt r
 
 
 ;————————————————————————————————————————————-
