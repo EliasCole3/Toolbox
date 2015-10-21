@@ -64,25 +64,13 @@ foo:
     ; js
     ; -------------------------
     
-    SendInput let buttonIds = [
-    
-    for each, field in inputs
-      SendInput "%field%",{space}
-    
-    ; removing the last space and comma
-    SendInput {BackSpace 2}
-    
-    SendInput ]`n
-    SendInput `n
-    SendInput buttonIds.forEach(buttonId => {{}`n
-    SendInput {space 2}$("{#}" {+} buttonId).click(e => {{}`n
-    SendInput {space 4}let button = $(e.currentTarget)`n
-    SendInput {space 4}$("{#}" {+} buttonId {+} "-radio").click()`n
-    SendInput {space 4}$(".employee-filter-button").removeClass("btn-success")`n
-    SendInput {space 4}button.addClass("btn-success")`n
-    SendInput {space 2}{}})`n
+    SendInput $(".custom-radio-button").click(e => {{}`n
+    SendInput {space 2}let button = $(e.currentTarget)`n
+    SendInput {space 2}let buttonId = button.attr("id")`n
+    SendInput {space 2}$("{#}" {+} buttonId {+} "-radio").click()`n
+    SendInput {space 2}$(".custom-radio-button").removeClass("btn-success")`n
+    SendInput {space 2}button.addClass("btn-success")`n
     SendInput {}})`n
-    SendInput `n
     
     
 return
