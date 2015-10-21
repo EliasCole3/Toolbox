@@ -838,6 +838,11 @@ FormatTime, CurrentDateTime,, MM.dd.yy
 SendInput %CurrentDateTime%
 return
 
+:R*?:jjdate::
+FormatTime, CurrentDateTime,, MM.dd.yy
+SendInput %CurrentDateTime%
+return
+
 :R*?:dd-::
 FormatTime, CurrentDateTime,, MM-dd-yy
 SendInput %CurrentDateTime%

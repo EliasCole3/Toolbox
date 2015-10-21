@@ -3,7 +3,7 @@
 hotstrings("conlog(\w+)\s", "conlog")
 hotstrings("email(\w+)\s", "email")
 hotstrings("test([\w,]+)\s", "test")
-hotstrings("foo([\w,]+)\s", "foo")
+hotstrings("foo([\w,-_]+)\s", "foo")
 Return
 
 conlog:
@@ -30,13 +30,61 @@ test:
 return
 
 foo:
-    array2 := []
+    inputs := []
 
     for each, field in StrSplit($1, ",")
-        array2.Insert(field)
+        inputs.Insert(field)
 
-    var1 := array2[1]
-    SendInput %var1%
+    ; value1 := inputs[1]
+    ; value2 := inputs[2]
+    ; SendInput %var1%
+
+    
+    ; html
+    ; -------------------------
+    
+    SendInput htmlString {+}= ```n
+    SendInput <div id="custom-radio-button-wrapper" class="">`n
+    SendInput {space 2}<div class="btn-group" role="group">`n
+    
+    for each, field in inputs
+      SendInput {space 4}<button id="%field%" type="button" class="btn btn-default custom-radio-button">%field%</button>`n
+      
+    SendInput {space 2}</div>`n
+    
+    for each, field in inputs
+      SendInput {space 2}<input id="%field%-radio" name="environment" class="hidden" type="radio">`n
+
+    SendInput </div>```n
+    
+    
+    SendInput `n`n`n
+    
+    
+    ; js
+    ; -------------------------
+    
+    SendInput let buttonIds = [
+    
+    for each, field in inputs
+      SendInput "%field%",{space}
+    
+    ; removing the last space and comma
+    SendInput {BackSpace 2}
+    
+    SendInput ]`n
+    SendInput `n
+    SendInput buttonIds.forEach(buttonId => {{}`n
+    SendInput {space 2}$("{#}" {+} buttonId).click(e => {{}`n
+    SendInput {space 4}let button = $(e.currentTarget)`n
+    SendInput {space 4}$("{#}" {+} buttonId {+} "-radio").click()`n
+    SendInput {space 4}$(".employee-filter-button").removeClass("btn-success")`n
+    SendInput {space 4}button.addClass("btn-success")`n
+    SendInput {space 2}{}})`n
+    SendInput {}})`n
+    SendInput `n
+    
+    
 return
 
 
