@@ -864,6 +864,13 @@ Return
 */
 
 
+XButton1::
+SendInput {MButton}{enter}
+
+XButton2::
+SendInput {click}{enter}
+
+
 
 
 
