@@ -341,3 +341,16 @@ for(var i = 0; i < nodes.length; i++) {
 
 //jquery on/off namespacing
 $(".ple-nullable").off("click.nullable-disable").on("click.nullable-disable", nullFunction); 
+
+
+//popping and deleting a random element out of an array
+  addPopRandomElement: function() {
+    Array.prototype.popRandomElement = function () {
+      var index = Math.round(Math.random() * (this.length - 1));
+      var element = this[index];
+      if (index > -1) {
+        this.splice(index, 1);
+      }
+      return element;
+    }
+  },

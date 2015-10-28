@@ -153,8 +153,16 @@ var ebot = {
    * insertModalHtml()
    * 
    */
-  changeModalView: function(htmlString) {
+  changeModalView: function(htmlString, headerText) {
     $("#form-target").html(htmlString);
+    
+    if(headerText === false) {
+      //leave the header as it is
+    } else {
+      headerText = headerText || "";
+      $("#modal-header").html("<h4>" + headerText + "</h4>");
+    }
+
   },
 
   /**
@@ -625,26 +633,32 @@ var ebot = {
   },
   
   makeSelectOutOfArrayOfModels: function(arrayOfModels, modelName, selectProps, optionToSelect) {
-    var formField = "<select ";
+    if(arrayOfModels !== undefined) {
+      var formField = "<select ";
     
-    for(prop in selectProps) {
-      formField += prop + "='" + selectProps[prop] + "' ";
-    }
-    
-    formField += ">";
-    
-    arrayOfModels.forEach(function(model) {
-      if(optionToSelect === model[modelName + "_id"]) {
-        formField += "<option value='" + model[modelName + "_id"] + "' selected>" + model.name + "</option>";
-      } else {
-        formField += "<option value='" + model[modelName + "_id"] + "'>" + model.name + "</option>";
+      for(prop in selectProps) {
+        formField += prop + "='" + selectProps[prop] + "' ";
       }
       
-    });
-
-    formField += "</select>";
+      formField += ">";
+      
+      arrayOfModels.forEach(function(model) {
+        if(optionToSelect === model[modelName + "_id"]) {
+          formField += "<option value='" + model[modelName + "_id"] + "' selected>" + model.name + "</option>";
+        } else {
+          formField += "<option value='" + model[modelName + "_id"] + "'>" + model.name + "</option>";
+        }
+        
+      });
+  
+      formField += "</select>";
+      
+      return formField;
+    } else {
+      console.log("empty array of models in bot.makeSelectOutOfArrayOfModels")
+      return "<select id=''><option value=''>Erro</option></select>"
+    }
     
-    return formField;
   },
 
   chosenOptions: {
