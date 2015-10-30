@@ -543,7 +543,7 @@ var ebot = {
   },
 
   getExpandToggleRowHtml: function(uniqueAttrName, uniqueAttrValue) {
-    return "<button class='btn btn-sm expand-button' " + uniqueAttrName + "='" + uniqueAttrValue + "' glyphicon='minus'><i class='glyphicon glyphicon-minus'>";
+    return "<button class='btn btn-sm expand-button' " + uniqueAttrName + "='" + uniqueAttrValue + "' glyphicon='minus'><i class='glyphicon glyphicon-minus'></i></button>";
   },
   
   assignHandlerExpandToggleRow: function(uniqueAttrName) {
@@ -642,6 +642,9 @@ var ebot = {
       
       formField += ">";
       
+      //empty option for chosen
+      formField += "<option value=''></option>";
+      
       arrayOfModels.forEach(function(model) {
         if(optionToSelect === model[modelName + "_id"]) {
           formField += "<option value='" + model[modelName + "_id"] + "' selected>" + model.name + "</option>";
@@ -655,7 +658,7 @@ var ebot = {
       
       return formField;
     } else {
-      console.log("empty array of models in bot.makeSelectOutOfArrayOfModels")
+      console.log("empty array of models in ebot.makeSelectOutOfArrayOfModels")
       return "<select id=''><option value=''>Erro</option></select>"
     }
     
