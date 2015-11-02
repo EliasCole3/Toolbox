@@ -848,6 +848,9 @@ FormatTime, CurrentDateTime,, MM-dd-yy
 SendInput %CurrentDateTime%
 return
 
+:*:jjsig::
+SendInput All the best,`nElias
+return
 
 /*
 :?*:email::
