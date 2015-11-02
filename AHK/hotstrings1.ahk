@@ -217,7 +217,7 @@ Send {Left 5}
 return
 
 :*:jjcalled::
-SendInput console.log("Called"); 
+SendInput console.log("Called")
 return
 
 ::jjfor::
@@ -833,7 +833,7 @@ SendInput {}};`n
 SendInput `n
 return
 
-:R*?:ddd::
+:*:ddd::
 FormatTime, CurrentDateTime,, MM.dd.yy
 SendInput %CurrentDateTime%
 return
@@ -843,7 +843,7 @@ FormatTime, CurrentDateTime,, MM.dd.yy
 SendInput %CurrentDateTime%
 return
 
-:R*?:dd-::
+:*:dd-::
 FormatTime, CurrentDateTime,, MM-dd-yy
 SendInput %CurrentDateTime%
 return
