@@ -1,88 +1,53 @@
-:*:jjhelp::
-SendInput jjcon`n
-SendInput jjale`n
-SendInput jj''`n
-SendInput jj..`n
-SendInput jj{+}{+}`n
-SendInput jjdivs`n
-SendInput jjdivd`n
-SendInput jjspans`n
-SendInput jjspand`n
-SendInput jj{<}{!}`n
-SendInput jjbr`n
-SendInput jjinput`n
-SendInput jjbut`n
-SendInput jjtable`n
-SendInput jjtr`n
-SendInput jjth`n
-SendInput jjtd`n
-SendInput jjplus`n
-SendInput jjlabel`n
-SendInput jjselect`n
-SendInput jjoption`n
-SendInput jjimg`n
-SendInput jqclick`n
-SendInput jqready`n
-SendInput jqattr`n
-SendInput jqhtml`n
-SendInput jqappend`n
-SendInput jqval`n
-SendInput jqajaxpost`n
-SendInput jqajaxget`n
-SendInput jqhide`n
-SendInput jqshow`n
-SendInput jqtrigger`n
-SendInput jqwhen`n
-SendInput jqapply`n
-SendInput jqon`n
-SendInput jqoff`n
-SendInput jqchange`n
-SendInput jjanon`n
-SendInput jjfun`n
-SendInput jjfilter`n
-SendInput jjforeach`n
-SendInput jjnotify`n
-SendInput jjpassby`n
-SendInput jjfor`n
-SendInput jjcalled`n
-SendInput jjcommit`n
-SendInput radiowrapperhtml`n
-SendInput radiowrapperjs`n
-SendInput chosenchangehandler`n
-SendInput getform`n
-SendInput getformide`n
-SendInput -w3`n
-SendInput chosenchange`n
-SendInput chosenupdated`n
-SendInput jjhs`n
-SendInput jjwidgetstart`n
-SendInput jjsr`n
-SendInput jjsso`n
-SendInput jjcfirst`n
-SendInput jjmakeelement`n
-SendInput shaliaseswork`n
-SendInput gogo`n
-SendInput esfun`n
-SendInput esforeach`n
-SendInput esclick`n
-SendInput eschange`n
-SendInput esapply`n
-SendInput eswidgetstart`n
-SendInput jjpush`n
-SendInput esmap`n
-SendInput tpgruntfile`n
-return
+/*
+for making an actual template: 
 
+sed -i 's/<<entity>>/entity_key/g' work-order-planner.js
+sed -i 's/<<entityCamelPlural>>/entityKeys/g' work-order-planner.js
+sed -i 's/<<entityPascal>>/EntityKey/g' work-order-planner.js
+sed -i 's/<<entityDashed>>/entity-key/g' work-order-planner.js
+sed -i 's/<<entityCamel>>/entityKey/g' work-order-planner.js
+sed -i 's/<<entityUnderscore>>/entity_key/g' work-order-planner.js
+
+*/
+
+
+
+/*
+
+Basic JS
+
+*/
 :*:jjcon::
 SendInput console.log()
 Send {Left 1}
 return
 
 :*:jjale::
-SendInput alert(); 
+SendInput alert()
 Send {Left 2}
 return
 
+:*:jj++::
+SendInput " {+}  {+} "
+Send {Left 4}
+return
+
+:*:jjcalled::
+SendInput console.log("Called")
+return
+
+:*:jjhs::
+SendInput htmlString {+}= ````
+Send {Left 1}
+return
+
+
+
+/*
+
+PHP
+
+*/
 :*:jj''::
 SendInput " .  . "
 Send {Left 4}
@@ -93,11 +58,13 @@ SendInput " .  . "
 Send {Left 4}
 return
 
-:*:jj++::
-SendInput " {+}  {+} "
-Send {Left 4}
-return
 
+
+/*
+
+HTML
+
+*/
 :*:jjdivs::
 SendInput <div id='' class=''></div>
 Send {Left 6}
@@ -114,7 +81,7 @@ Send {Left 6}
 return
 
 :*:jjspand::
-SendInput <span id='' class=''></span>
+SendInput <span id="" class=""></span>
 Send {Left 6}
 return
 
@@ -129,7 +96,7 @@ return
 
 :*:jjinput::
 SendInput <input id='' name='' class='' type=''>
-Send {Left 29}
+Send {Left 27}
 return
 
 :*:jjbut::
@@ -162,6 +129,11 @@ SendInput <i class='glyphicon glyphicon-plus'></i>
 Send {Left 4}
 return
 
+:*:jjglyph::
+SendInput <i class='glyphicon glyphicon-'></i>
+Send {Left 6}
+return
+
 :*:jjlabel::
 SendInput <label></label>
 Send {Left 8}
@@ -182,6 +154,13 @@ SendInput <img src=''>
 Send {Left 2}
 return
 
+
+
+/*
+
+Complex JS
+
+*/
 :*:jjfun::
 SendInput temp: function() {{}`n
 SendInput {space 2}`n
@@ -216,10 +195,6 @@ SendInput (function() {{}{}})();
 Send {Left 5}
 return
 
-:*:jjcalled::
-SendInput console.log("Called")
-return
-
 ::jjfor::
 SendInput for(var i = 0; i < {;} i{+}{+}) {{}`n
 SendInput   `n
@@ -245,16 +220,35 @@ SendInput {space 4}`n
 SendInput {}}`n
 return
 
+
+
+/*
+
+Ebot
+
+*/
 :*:jjnotify::
-SendInput ebot.notify("");
+SendInput ebot.notify("")
 Send {Left 3}
 return
 
-:*:jjglyph::
-SendInput <i class='glyphicon glyphicon-'></i>
-Send {Left 6}
+:*:jjmakeelement::
+SendInput htmlString {+}= ebot.makeElement({{}`n
+SendInput {space 2}tag: "button",`n
+SendInput {space 2}content: "ButtonName",`n
+SendInput {space 2}_class: "btn btn-sm",`n
+SendInput {space 2}title: "click me!",`n
+SendInput {space 2}"custom-attr": customAttrValue`n
+SendInput {}});`n
 return
 
+
+
+/*
+
+JQuery
+
+*/
 :*:jqclick::
 SendInput $("").click(function() {{}{}});
 Send {Left 3}
@@ -353,271 +347,13 @@ SendInput   {}}`n
 SendInput {}});`n
 return
 
-:*:jjcommit::
-SendInput git commit -a -m "" 
-Send {Left 1}
-return
 
-:*:jjpassby::
-SendInput var obj1 = {{}{}}; `n
-SendInput obj1["testprop"] = "lalala"; `n
-SendInput var obj2 = obj1; `n
-SendInput  `n
-SendInput console.log(obj1.testprop); `n
-SendInput console.log(obj2.testprop); `n
-SendInput  `n
-SendInput obj1.testprop = "Objects are passed by reference"; `n
-SendInput  `n
-SendInput console.log(obj1.testprop); `n
-SendInput console.log(obj2.testprop); `n
-SendInput    `n
-SendInput console.log("----------"); `n
-SendInput    `n
-SendInput var testval1 = "jajaja"; `n
-SendInput var testval2 = testval1; `n
-SendInput  `n
-SendInput console.log(testval1); `n
-SendInput console.log(testval2); `n
-SendInput    `n
-SendInput testval1 = "The value below is the same as before because non-objects are passed by value"; `n
-SendInput  `n
-SendInput console.log(testval1); `n
-SendInput console.log(testval2); `n
-return
-
-::radiowrapperhtml::
-SendInput <div id="wrapper-radio" class="wrapper">`n
-SendInput {space 4}<div class="btn-group" role="group">`n
-SendInput {space 8}<button id="left-button" type="button" class="btn btn-default">Left</button>`n
-SendInput {space 8}<button id="right-button" type="button" class="btn btn-default">Right</button>`n
-SendInput {space 4}</div>`n
-SendInput {space 4}<input id="left-radio" name="environment" class="hidden" type="radio">`n
-SendInput {space 4}<input id="right-radio" name="environment" class="hidden" type="radio">`n
-SendInput </div>`n
-return
-
-::radiowrapperjs::
-SendInput assignHandlersDirectionButtons: function() {{}`n
-SendInput {space 4}`n
-SendInput {space 2}buttons = ["left", "right", "up", "down"];`n
-SendInput {space 2}`n
-SendInput {space 2}buttons.forEach(function(button) {{}`n
-SendInput {space 4}$("{#}" {+} button {+} "-button").click(function() {{}`n
-SendInput {space 6}$("{#}" {+} button {+} "-radio").click();`n
-SendInput {space 6}sb.updateButtonAppearance(button);`n
-SendInput {space 6}sb.directionSelected = button;`n
-SendInput {space 4}{}});`n
-SendInput {space 2}{}});`n
-SendInput {space 2}`n
-SendInput {}},`n
-SendInput {space 2}`n
-SendInput updateButtonAppearance: function(button) {{}`n
-SendInput {space 2}`n
-SendInput {space 2}$(".direction-button").removeClass("btn-success");`n
-SendInput {space 2}`n
-SendInput {space 2}$("{#}" {+} button {+} "-button").addClass("btn-success");`n
-SendInput {space 2}`n
-SendInput {}},`n
-return
-
-::chosenchangehandler::
-SendInput assignHandlerTempSelect: function() {{}`n
-SendInput {space 2}$("{#}temp-select").chosen().change(function() {{}`n
-SendInput {space 4}var tempId = $("{#}temp-select option:selected").val();`n
-SendInput {space 2}{}});`n
-SendInput {}},`n
-return
-
-::getform::
-SendInput getTempCRUDForm: function() {{}`n
-SendInput {space 2}var htmlString = "" {+} `n
-SendInput {space 2}"<label>Checkbox</label> <input id='active' type='checkbox' class='form-control'><br>" {+} `n
-SendInput {space 2}"<label>Text: </label> <input id='text' type='text' class='form-control'><br>" {+} `n
-SendInput {space 2}"<label>Number: </label> <input id='number' type='number' class='form-control'><br>" {+} `n
-SendInput {space 2}"<label>Date: </label> <input id='date' type='date' class='form-control'><br>" {+} `n
-SendInput {space 2}"<label>Details: </label> <textarea id='details' class='form-control'></textarea><br>" {+}`n
-SendInput {space 2}"<label>Variety: </label> <select id='variety-select' class='form-control' data-placeholder='Choose a variety...'><option>Loading...</option></select><br>" {+} `n
-SendInput {space 2}"<button id='submit-temp-button' class='form-control' type='submit'>Submit</button>";`n
-SendInput {space 2}"<button id='delete-temp-button' class='btn btn-lg form-control' type='submit'>Yes</button>";`n
-SendInput {space 2}return htmlString;`n
-SendInput {}},`n
-return
-
-::getformide::
-SendInput getTempCRUDForm: function() {{}`n
-SendInput {space 2}var htmlString = "" {+} `n
-SendInput "<label>Checkbox</label> <input id='active' type='checkbox' class='form-control'><br>" {+} `n
-SendInput "<label>Text: </label> <input id='text' type='text' class='form-control'><br>" {+} `n
-SendInput "<label>Number: </label> <input id='number' type='number' class='form-control'><br>" {+} `n
-SendInput "<label>Date: </label> <input id='date' type='date' class='form-control'><br>" {+} `n
-SendInput "<label>Details: </label> <textarea id='details' class='form-control'></textarea><br>" {+}`n
-SendInput "<label>Variety: </label> <select id='variety-select' class='form-control' data-placeholder='Choose a variety...'><option>Loading...</option></select><br />" {+} `n
-SendInput "<button id='submit-temp-button' class='form-control' type='submit'>Submit</button>";`n
-SendInput "<button id='delete-temp-button' class='btn btn-lg form-control' type='submit'>Yes</button>";`n
-SendInput return htmlString;`n
-SendInput {}},`n
-return
-
-:*:-w3::
-SendInput -site:w3schools.com
-return
-
-:*:chosenchange::
-SendInput $("").chosen().change(function() {{}`n
-SendInput {space 2}`n
-SendInput {}});
-Send {Up 4}
-Send {Home}
-Send {Right 3}
-return
-
-:*:chosenupdated::
-SendInput $("").trigger("chosen:updated");
-Send {Home}
-Send {Right 3}
-return
-
-:*:jjhs::
-SendInput htmlString {+}= ````
-Send {Left 1}
-return
-
-:*:jjwidgetstart::
-SendInput (function() {{}`n
-SendInput {space 2}`n
-SendInput $(function() {{}`n
-SendInput {space 2}$(".center-block").prepend("<div id='notifications'></div>");`n
-SendInput {space 2}$(".center-block").append("<div id='modal-holder'></div>");`n
-SendInput {space 2}abc.initialize();`n
-SendInput //{space 2}ebot.updateDocumentation(abc);`n
-SendInput {}});`n
-SendInput `n
-SendInput var abc = {{}`n
-SendInput {space 2}`n
-SendInput {space 2}initialize: function() {{}`n
-SendInput {space 4}ebot.insertModalHtml();`n
-SendInput {space 4}abc.enableChosen();`n
-SendInput {space 4}abc.assignInitialHandlers();`n
-SendInput {space 4}`n
-SendInput {space 4}ebot.retrieveModel(abc, "<<entityCamelPlural>>").then(function() {{}`n
-SendInput {space 6}abc.load<<entityPascal>>SelectStatic();`n
-SendInput {space 4}{}});`n
-SendInput {space 2}{}},`n
-SendInput {space 2}`n
-SendInput {space 2}assignInitialHandlers: function() {{}`n
-SendInput {space 4}abc.assignHandler<<entityPascal>>SelectStatic();`n
-SendInput {space 2}{}},`n
-SendInput {space 2}`n
-SendInput {space 2}enableChosen: function() {{}`n
-SendInput {space 4}$("{#}<<entityDashed>>-select-static").chosen(ebot.chosenOptions);`n
-SendInput {space 2}{}},`n
-SendInput `n
-SendInput {space 2}load<<entityPascal>>SelectStatic: function() {{}`n
-SendInput {space 4}var htmlString = "<option value=''></option>";`n
-SendInput {space 4}abc.<<entityCamelPlural>>.forEach(function(<<entityCamel>>) {{}`n
-SendInput {space 6}htmlString {+}= "<option value='" {+} <<entityCamel>>.<<entityUnderscore>>_id {+} "'>" {+} <<entityCamel>>.name {+} "</option>"`n
-SendInput {space 4}{}});`n
-SendInput {space 4}`n
-SendInput {space 4}$("{#}<<entityDashed>>-select-static").html(htmlString).trigger("chosen:updated");`n
-SendInput {space 2}{}},`n
-SendInput `n
-SendInput {space 2}assignHandler<<entityPascal>>SelectStatic: function() {{}`n
-SendInput {space 4}$("{#}<<entityDashed>>-select-static").chosen().change(function() {{}`n
-SendInput {space 6}abc.reset();`n
-SendInput {space 4}{}});`n
-SendInput {space 2}{}},`n
-SendInput {space 2}`n
-SendInput {space 2}reset: function() {{}`n
-SendInput {space 6}`n
-SendInput {space 2}{}},`n
-SendInput {space 2}`n
-SendInput {space 2}<<entityCamelPlural>>: []`n
-SendInput {space 4}`n
-SendInput {}};`n
-SendInput {space 2}`n
-SendInput {}})();`n
-SendInput `n
-return
 
 /*
-sed -i 's/<<entity>>/entity_key/g' work-order-planner.js
-sed -i 's/<<entityCamelPlural>>/entityKeys/g' work-order-planner.js
-sed -i 's/<<entityPascal>>/EntityKey/g' work-order-planner.js
-sed -i 's/<<entityDashed>>/entity-key/g' work-order-planner.js
-sed -i 's/<<entityCamel>>/entityKey/g' work-order-planner.js
-sed -i 's/<<entityUnderscore>>/entity_key/g' work-order-planner.js
+
+ES6
+
 */
-
-:*:jjsr::
-SendInput site:reddit.com
-return
-
-:*:jjsso::
-SendInput site:stackoverflow.com
-return
-
-:*:jjcfirst::
-SendInput ssh bilbo@192.241.203.33
-return
-
-:*:jjmakeelement::
-SendInput htmlString {+}= ebot.makeElement({{}`n
-SendInput {space 2}tag: "button",`n
-SendInput {space 2}content: "ButtonName",`n
-SendInput {space 2}_class: "btn btn-sm",`n
-SendInput {space 2}title: "click me!",`n
-SendInput {space 2}"custom-attr": customAttrValue`n
-SendInput {}});`n
-return
-
-::shawork::
-SendInput alias ls="ls -al"`n
-SendInput alias ..="cd .."`n
-SendInput alias www="cd /c/wamp/www"`n
-SendInput alias new="cd /c/wamp/www/New"`n
-SendInput alias workspace="cd ~/workspace"`n
-SendInput alias labcloud="cd ~/workspace/labcloud"`n
-SendInput alias ws="cd ~/workspace"`n
-SendInput alias berrystack="cd ~/workspace/app-berrystack"`n
-SendInput alias bs="cd ~/workspace/app-berrystack"`n
-SendInput alias sublimeopen="'C:\Program Files\Sublime Text 2\sublime_text.exe'"`n
-SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}.exe'"`n
-SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
-SendInput clear`n
-SendInput alias ..="cd .."`n
-return
-
-::gogo::
-; SendInput alias ls="ls -al"`n
-SendInput alias ..="cd .."`n
-SendInput alias www="cd /c/wamp/www"`n
-SendInput alias new="cd /c/wamp/www/New"`n
-SendInput alias workspace="cd ~/workspace"`n
-SendInput alias ws="cd ~/workspace"`n
-SendInput alias berrystack="cd ~/workspace/app-berrystack"`n
-SendInput alias labcloud="cd ~/workspace/labcloud"`n
-SendInput alias toolbox="cd ~/Desktop/Toolbox"`n
-SendInput alias bs="cd ~/workspace/app-berrystack"`n
-SendInput alias sublimeopen="'C:\Program Files\Sublime Text 2\sublime_text.exe'"`n
-SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}.exe'"`n
-SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
-SendInput alias hostgator="ssh -p 2222 elias@198.57.247.143"`n
-SendInput alias droplet1="ssh bilbo@192.241.203.33"`n
-SendInput alias ..="cd .."`n
-SendInput alias orange="ssh eliascol@gauntlet.asoshared.com"`n
-return
-
-:*:shahostgator::
-SendInput alias composer="php composer.phar"`n
-SendInput alias ..="cd .."`n
-return
-
-:*:shadroplet1::
-SendInput alias composer="php ~/composer.phar"`n
-SendInput alias ..="cd .."`n
-return
-
-
 :*:esfun::
 SendInput temp: () => {{}{}},
 Send {Left 2}
@@ -629,7 +365,6 @@ Send {Right 4}
 Send {Shift Up}
 return
 
-
 :*:esforeach::
 SendInput array.forEach(element => {{}{}})
 Send {Left 2}
@@ -639,10 +374,6 @@ Send {Home}
 Send {Shift Down}
 Send {Right 5}
 Send {Shift Up}
-return
-
-:*:jjpush::
-SendInput git push origin master
 return
 
 :*:esmap::
@@ -710,6 +441,183 @@ Send {Up 2}
 Send {Tab}
 return
 
+
+
+/*
+
+CLI/Shell/Bash
+
+*/
+:*:jjcommit::
+SendInput git commit -a -m "" 
+Send {Left 1}
+return
+
+:*:jjcfirst::
+SendInput ssh bilbo@192.241.203.33
+return
+
+::shawork::
+SendInput alias ls="ls -al"`n
+SendInput alias ..="cd .."`n
+SendInput alias www="cd /c/wamp/www"`n
+SendInput alias new="cd /c/wamp/www/New"`n
+SendInput alias workspace="cd ~/workspace"`n
+SendInput alias labcloud="cd ~/workspace/labcloud"`n
+SendInput alias ws="cd ~/workspace"`n
+SendInput alias berrystack="cd ~/workspace/app-berrystack"`n
+SendInput alias bs="cd ~/workspace/app-berrystack"`n
+SendInput alias sublimeopen="'C:\Program Files\Sublime Text 2\sublime_text.exe'"`n
+SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}.exe'"`n
+SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
+SendInput clear`n
+SendInput alias ..="cd .."`n
+return
+
+::gogo::
+; SendInput alias ls="ls -al"`n
+SendInput alias ..="cd .."`n
+SendInput alias www="cd /c/wamp/www"`n
+SendInput alias new="cd /c/wamp/www/New"`n
+SendInput alias workspace="cd ~/workspace"`n
+SendInput alias ws="cd ~/workspace"`n
+SendInput alias berrystack="cd ~/workspace/app-berrystack"`n
+SendInput alias labcloud="cd ~/workspace/labcloud"`n
+SendInput alias toolbox="cd ~/Desktop/Toolbox"`n
+SendInput alias bs="cd ~/workspace/app-berrystack"`n
+SendInput alias sublimeopen="'C:\Program Files\Sublime Text 2\sublime_text.exe'"`n
+SendInput alias notepadopen="'C:\Program Files (x86)\Notepad{+}{+}\notepad{+}{+}.exe'"`n
+SendInput alias nano="'C:\Users\Bliss\Desktop\nano\nano.exe'"`n
+SendInput alias hostgator="ssh -p 2222 elias@198.57.247.143"`n
+SendInput alias droplet1="ssh bilbo@192.241.203.33"`n
+SendInput alias ..="cd .."`n
+SendInput alias orange="ssh eliascol@gauntlet.asoshared.com"`n
+return
+
+:*:shadroplet1::
+SendInput alias composer="php ~/composer.phar"`n
+SendInput alias ..="cd .."`n
+return
+
+:*:jjpush::
+SendInput git push origin master
+return
+
+
+
+/*
+
+Chosen
+
+*/
+::chosenchangehandler::
+SendInput assignHandlerTempSelect: function() {{}`n
+SendInput {space 2}$("{#}temp-select").chosen().change(function() {{}`n
+SendInput {space 4}var tempId = $("{#}temp-select option:selected").val();`n
+SendInput {space 2}{}});`n
+SendInput {}},`n
+return
+
+:*:chosenchange::
+SendInput $("").chosen().change(function() {{}`n
+SendInput {space 2}`n
+SendInput {}});
+Send {Up 4}
+Send {Home}
+Send {Right 3}
+return
+
+:*:chosenupdated::
+SendInput $("").trigger("chosen:updated");
+Send {Home}
+Send {Right 3}
+return
+
+
+
+/*
+
+Google-fu
+
+*/
+:*:-w3::
+SendInput -site:w3schools.com
+return
+
+:*:jjsr::
+SendInput site:reddit.com
+return
+
+:*:jjsso::
+SendInput site:stackoverflow.com
+return
+
+
+
+/*
+
+Miscellaneous
+
+*/
+:*:jjpassby::
+SendInput var obj1 = {{}{}}; `n
+SendInput obj1["testprop"] = "lalala"; `n
+SendInput var obj2 = obj1; `n
+SendInput  `n
+SendInput console.log(obj1.testprop); `n
+SendInput console.log(obj2.testprop); `n
+SendInput  `n
+SendInput obj1.testprop = "Objects are passed by reference"; `n
+SendInput  `n
+SendInput console.log(obj1.testprop); `n
+SendInput console.log(obj2.testprop); `n
+SendInput    `n
+SendInput console.log("----------"); `n
+SendInput    `n
+SendInput var testval1 = "jajaja"; `n
+SendInput var testval2 = testval1; `n
+SendInput  `n
+SendInput console.log(testval1); `n
+SendInput console.log(testval2); `n
+SendInput    `n
+SendInput testval1 = "The value below is the same as before because non-objects are passed by value"; `n
+SendInput  `n
+SendInput console.log(testval1); `n
+SendInput console.log(testval2); `n
+return
+
+XButton1::
+SendInput {MButton}{enter}
+
+XButton2::
+SendInput {click}{enter}
+
+:*:ddd::
+FormatTime, CurrentDateTime,, MM.dd.yy
+SendInput %CurrentDateTime%
+return
+
+:R*?:jjdate::
+FormatTime, CurrentDateTime,, MM.dd.yy
+SendInput %CurrentDateTime%
+return
+
+:*:dd-::
+FormatTime, CurrentDateTime,, MM-dd-yy
+SendInput %CurrentDateTime%
+return
+
+:*:jjsig::
+SendInput All the best,`nElias
+return
+
+
+
+/*
+
+Templates
+
+*/
 :*:eswidgetstart::
 SendInput $(() => {{}`n
 SendInput {space 2}abc.initialize()`n
@@ -833,45 +741,51 @@ SendInput {}};`n
 SendInput `n
 return
 
-:*:ddd::
-FormatTime, CurrentDateTime,, MM.dd.yy
-SendInput %CurrentDateTime%
-return
-
-:R*?:jjdate::
-FormatTime, CurrentDateTime,, MM.dd.yy
-SendInput %CurrentDateTime%
-return
-
-:*:dd-::
-FormatTime, CurrentDateTime,, MM-dd-yy
-SendInput %CurrentDateTime%
-return
-
-:*:jjsig::
-SendInput All the best,`nElias
-return
-
-/*
-:?*:email::
-Input, thename, v,{Enter}{Space}
-If (thename = "")
-{
-    SendInput, {Bs}email `
-    Return
-}
-StringLen,MyLen, thename
-MyLen++
-SendInput {BackSpace %MyLen%}Hi +%thename%,{Enter 2}Sample text.{Enter 2}Thanks,{Enter}Zach
-Return
-*/
 
 
-XButton1::
-SendInput {MButton}{enter}
 
-XButton2::
-SendInput {click}{enter}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

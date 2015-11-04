@@ -10,6 +10,21 @@ conlog:
     SendInput, console.log(%$1%);
 return
 
+
+/*
+:?*:email::
+Input, thename, v,{Enter}{Space}
+If (thename = "")
+{
+    SendInput, {Bs}email `
+    Return
+}
+StringLen,MyLen, thename
+MyLen++
+SendInput {BackSpace %MyLen%}Hi +%thename%,{Enter 2}Sample text.{Enter 2}Thanks,{Enter}Zach
+Return
+*/
+
 email:
     SendInput, Hi %$1%,{Enter 2}Sample text.{Enter 2}Thanks,{Enter}Zach
 return
