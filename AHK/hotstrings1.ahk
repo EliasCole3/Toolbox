@@ -229,7 +229,7 @@ Ebot
 */
 :*:jjnotify::
 SendInput ebot.notify("")
-Send {Left 3}
+Send {Left 2}
 return
 
 :*:jjmakeelement::
@@ -550,6 +550,10 @@ return
 
 :*:jjsso::
 SendInput site:stackoverflow.com
+return
+
+:*:jjswp::
+SendInput site:wikipedia.org
 return
 
 
