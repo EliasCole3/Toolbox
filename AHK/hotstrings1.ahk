@@ -204,6 +204,13 @@ Send {Up 2}
 Send {Right 20}
 return
 
+::jjforin::
+SendInput for(var prop in obj) {{}`n
+SendInput `n
+SendInput {}}`n
+Send {Up 2}{Tab 2}
+return
+
 :*:jjswitch::
 SendInput switch(varName) {{}`n
 SendInput {space 2}case "case1":`n
@@ -394,6 +401,9 @@ Send {Left 2}
 Send {Enter}
 SendInput let element = $(e.currentTarget)
 Send {Enter}
+Send {Up 2}
+Send {Home}
+Send {Right 3}
 return
 
 :*:eschange::
@@ -439,6 +449,13 @@ SendInput let htmlString = `````n`n`n`n
 SendInput return htmlString
 Send {Up 2}
 Send {Tab}
+return
+
+::esforin::
+SendInput for(let prop in obj) {{}`n
+SendInput `n
+SendInput {}}`n
+Send {Up 2}{Tab 2}
 return
 
 
@@ -539,6 +556,7 @@ return
 
 Google-fu
 
+
 */
 :*:-w3::
 SendInput -site:w3schools.com
@@ -556,6 +574,33 @@ return
 SendInput site:wikipedia.org
 return
 
+
+
+/*
+
+Node
+
+*/
+:*:noderouter::
+SendInput app.get('/URI', function(req, res) {{}`n
+SendInput res.sendFile(__dirname {+} '/URI')`n
+SendInput {}})`n
+return
+
+
+
+/*
+
+Voice Attack
+
+*/
+::vaddd::
+Send {End}
+Send {Shift Down}
+Send {Home}
+Send {Shift Up}
+Send {Delete}
+return
 
 
 /*
@@ -590,11 +635,13 @@ SendInput console.log(testval1); `n
 SendInput console.log(testval2); `n
 return
 
+/*
 XButton1::
 SendInput {MButton}{enter}
 
 XButton2::
 SendInput {click}{enter}
+*/
 
 :*:ddd::
 FormatTime, CurrentDateTime,, MM.dd.yy
