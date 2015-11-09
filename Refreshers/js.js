@@ -354,3 +354,7 @@ $(".ple-nullable").off("click.nullable-disable").on("click.nullable-disable", nu
       return element;
     }
   },
+
+
+//remove leading/trailing comma
+var trim = str.replace(/(^,)|(,$)/g, "")

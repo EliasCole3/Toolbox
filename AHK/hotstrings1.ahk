@@ -662,6 +662,12 @@ return
 SendInput All the best,`nElias
 return
 
+:*:jjmc::
+SendInput `/`*`n`n`n`n`*`/
+Send {Up 2}
+return
+
+
 
 
 /*
