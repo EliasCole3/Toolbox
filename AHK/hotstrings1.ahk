@@ -362,11 +362,24 @@ ES6
 
 */
 :*:esfun::
+/*
+not working in sublime right now...
 SendInput temp: () => {{}{}},
 Send {Left 2}
 Send {Enter}
 Send {Up}
 Send {Home}
+Send {Shift Down}
+Send {Right 4}
+Send {Shift Up}
+
+*/
+
+SendInput temp: () => {{}{}},
+Send {Left 2}
+Send {Enter 2}
+Send {Up 2}
+Send {End}{Home}
 Send {Shift Down}
 Send {Right 4}
 Send {Shift Up}
@@ -402,7 +415,7 @@ Send {Enter}
 SendInput let element = $(e.currentTarget)
 Send {Enter}
 Send {Up 2}
-Send {Home}
+Send {Home 2}
 Send {Right 3}
 return
 
