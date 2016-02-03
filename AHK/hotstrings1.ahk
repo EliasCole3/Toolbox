@@ -471,6 +471,20 @@ SendInput {}}`n
 Send {Up 2}{Tab 2}
 return
 
+:*:esget::
+SendInput $.ajax({{}`n
+SendInput type: "GET",`n
+SendInput url: URI_HERE,`n
+SendInput success: function(data, status, jqXHR) {{}`n
+SendInput `n
+SendInput {}},`n
+SendInput error: function(jqXHR, status) {{}`n
+SendInput console.log("GET error")`n
+SendInput {}}`n
+SendInput {}})`n
+SendInput `n
+return
+
 
 
 /*
